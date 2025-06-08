@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>致远互联AI产品周报</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            min-height: 100vh;
+            padding: 15px;
+        }
+        
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            border: 1px solid #e9ecef;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            color: white;
+            padding: 25px 20px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .logo {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+        }
+        
+        .subtitle {
+            font-size: 14px;
+            opacity: 0.9;
+            margin-bottom: 8px;
+            font-weight: 400;
+        }
+        
+        .date-range {
+            font-size: 12px;
+            opacity: 0.85;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 6px 14px;
+            border-radius: 20px;
+            display: inline-block;
+            font-weight: 500;
+        }
+        
+        .content {
+            padding: 20px 18px;
+        }
+        
+        .sales-summary {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 18px;
+            margin-bottom: 25px;
+            position: relative;
+        }
+        
+        .sales-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1e40af;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .sales-title::before {
+            content: '📊';
+            margin-right: 8px;
+            font-size: 16px;
+        }
+        
+        .sales-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+        
+        .stat-item {
+            text-align: center;
+            flex: 1;
+        }
+        
+        .stat-number {
+            font-size: 24px;
+            font-weight: 700;
+            color: #1e40af;
+            display: block;
+        }
+        
+        .stat-label {
+            font-size: 12px;
+            color: #64748b;
+            font-weight: 500;
+        }
+        
+        .sales-desc {
+            font-size: 13px;
+            color: #475569;
+            line-height: 1.5;
+            background: white;
+            padding: 10px 12px;
+            border-radius: 6px;
+            border-left: 3px solid #1e40af;
+        }
+        
+        .product-section {
+            margin-bottom: 25px;
+            border-radius: 10px;
+            padding: 18px;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid;
+        }
+        
+        .product-section.knowledge {
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+            color: white;
+            border-color: #1e40af;
+        }
+        
+        .product-section.zhihuiquan {
+            background: linear-gradient(135deg, #7c3aed 0%, #a855f7 100%);
+            color: white;
+            border-color: #7c3aed;
+        }
+        
+        .product-section.grc {
+            background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+            color: white;
+            border-color: #059669;
+        }
+        
+        .product-title {
+            font-size: 17px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .product-title::before {
+            content: '🚀';
+            margin-right: 8px;
+            font-size: 16px;
+        }
+        
+        .product-section.zhihuiquan .product-title::before {
+            content: '✨';
+        }
+        
+        .product-section.grc .product-title::before {
+            content: '🛡️';
+        }
+        
+        .product-desc {
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 15px;
+            opacity: 0.95;
+            position: relative;
+            z-index: 1;
+            font-weight: 400;
+        }
+        
+        .features {
+            margin: 15px 0;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .feature-item {
+            font-size: 13px;
+            margin-bottom: 8px;
+            padding-left: 15px;
+            position: relative;
+            opacity: 0.9;
+            line-height: 1.4;
+        }
+        
+        .feature-item::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: bold;
+        }
+        
+        .trial-section {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .trial-text {
+            font-size: 13px;
+            font-weight: 500;
+        }
+        
+        .qr-code {
+            width: 50px;
+            height: 50px;
+            background: white;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        
+        .qr-code canvas {
+            width: 40px;
+            height: 40px;
+        }
+        
+        .footer {
+            background: linear-gradient(135deg, #1f2937 0%, #374151 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .company-info {
+            font-size: 14px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .contact-info {
+            font-size: 12px;
+            opacity: 0.85;
+            line-height: 1.6;
+            font-weight: 400;
+        }
+        
+        .highlight {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+        
+        .update-badge {
+            display: inline-block;
+            background: #ef4444;
+            color: white;
+            font-size: 11px;
+            padding: 4px 8px;
+            border-radius: 12px;
+            margin-left: 8px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .coming-soon {
+            font-size: 12px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 5px 10px;
+            border-radius: 8px;
+            margin-top: 10px;
+            display: inline-block;
+            font-weight: 500;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .product-section {
+            animation: fadeIn 0.6s ease-out;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-content">
+                <div class="logo">致远互联 AI创新周报</div>
+                <div class="subtitle">人工智能产品动态</div>
+                <div class="date-range">第23周 | 2025.06.02 - 2025.06.08</div>
+            </div>
+        </div>
+        
+        <div class="content">
+            <div class="sales-summary">
+                <div class="sales-title">本周销售动态</div>
+                <div class="sales-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">9</span>
+                        <span class="stat-label">售前支持项目</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">100%</span>
+                        <span class="stat-label">国资央企客户</span>
+                    </div>
+                </div>
+                <div class="sales-desc">
+                    <strong>市场趋势：</strong>央企客户对AI应用需求旺盛，主要聚焦内部业务场景的AI落地应用探索，为我司产品提供了广阔的市场机遇。
+                </div>
+            </div>
+            
+            <div class="product-section knowledge">
+                <div class="product-title">
+                    知识管理平台重磅升级
+                    <span class="update-badge">Demo</span>
+                </div>
+                <div class="product-desc">
+                    企业级智能知识管理解决方案，三大核心功能全面升级
+                </div>
+                <div class="features">
+                    <div class="feature-item"><span class="highlight">智能文档管理</span> - AI自动标签、批注、版本控制</div>
+                    <div class="feature-item"><span class="highlight">批量管理优化</span> - 文件夹智能校验、批量对话</div>
+                    <div class="feature-item"><span class="highlight">群组协作升级</span> - 跨系统权限整合、团队知识共享</div>
+                    <div class="feature-item"><span class="highlight">四件套集成</span> - 与智能员工、数据分析等无缝对接</div>
+                </div>
+                <div class="trial-section">
+                    <div class="trial-text">立即体验 Demo</div>
+                    <div class="qr-code" id="qr-kb"></div>
+                </div>
+            </div>
+            
+            <div class="product-section zhihuiquan">
+                <div class="product-title">
+                    致慧泉功能增强
+                    <span class="update-badge">New</span>
+                </div>
+                <div class="product-desc">
+                    AI对话交互升级，支持聊天记录导出为可分享网页
+                </div>
+                <div class="features">
+                    <div class="feature-item">对话记录一键导出交互网页</div>
+                    <div class="feature-item">支持多人在线查看和互动</div>
+                    <div class="feature-item">便于知识沉淀和经验传承</div>
+                </div>
+                <div class="trial-section">
+                    <div class="trial-text">立即体验产品</div>
+                    <div class="qr-code" id="qr-chat"></div>
+                </div>
+            </div>
+            
+            <div class="product-section grc">
+                <div class="product-title">
+                    GRC SaaS平台正式发布
+                    <span class="update-badge">Hot</span>
+                </div>
+                <div class="product-desc">
+                    企业风险治理数字化解决方案，已集成百望智能审计能力
+                </div>
+                <div class="features">
+                    <div class="feature-item"><span class="highlight">智能风险监控</span> - 基于发票的动态风险识别</div>
+                    <div class="feature-item"><span class="highlight">合规管理</span> - 央企穿透式监管要求全覆盖</div>
+                    <div class="feature-item"><span class="highlight">场景拓展</span> - 持续更新多元化GRC应用</div>
+                </div>
+                <div class="trial-section">
+                    <div class="trial-text">立即体验平台</div>
+                    <div class="qr-code" id="qr-grc"></div>
+                </div>
+                <div class="coming-soon">🔥 6月30日后重大功能更新</div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <div class="company-info">北京致远互联软件股份有限公司</div>
+            <div class="contact-info">
+                专注企业数字化转型 | 领航AI智慧办公<br>
+                让智能化协作成为企业核心竞争力
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 生成二维码
+        document.addEventListener('DOMContentLoaded', function() {
+            // 知识管理平台二维码
+            new QRious({
+                element: document.createElement('canvas'),
+                value: 'https://kb.seeyon.chat/login',
+                size: 40,
+                foreground: '#1e40af',
+                background: '#ffffff'
+            }).canvas.style.cssText = 'width: 40px; height: 40px;';
+            document.getElementById('qr-kb').appendChild(
+                new QRious({
+                    element: document.createElement('canvas'),
+                    value: 'https://kb.seeyon.chat/login',
+                    size: 40,
+                    foreground: '#1e40af',
+                    background: '#ffffff'
+                }).canvas
+            );
+            
+            // 致慧泉二维码
+            document.getElementById('qr-chat').appendChild(
+                new QRious({
+                    element: document.createElement('canvas'),
+                    value: 'https://seeyon.chat',
+                    size: 40,
+                    foreground: '#7c3aed',
+                    background: '#ffffff'
+                }).canvas
+            );
+            
+            // GRC平台二维码
+            document.getElementById('qr-grc').appendChild(
+                new QRious({
+                    element: document.createElement('canvas'),
+                    value: 'http://dmz.riskbook.cn:9100/#/home',
+                    size: 40,
+                    foreground: '#059669',
+                    background: '#ffffff'
+                }).canvas
+            );
+        });
+    </script>
+</body>
+</html>
